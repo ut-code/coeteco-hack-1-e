@@ -14,7 +14,7 @@ function askQuestion(theme) {
                 {
                     "model": "gpt-3.5-turbo",
                     "messages": [
-                        { "role": "user", "content": `「${theme}」に関する質問を4つ作り、それに回答してください。小学校低学年にわかるように説明してください。` }
+                        { "role": "user", "content": `「${theme}」に関する質問を4つ作ってください。` }
                     ]
                 },
                 {
@@ -28,20 +28,26 @@ function askQuestion(theme) {
             const question = document.createElement('p');
             question.innerText = chatgpt_response;
             questionsAndAnswers.appendChild(question);
-            // answerQuestion(chatgpt_response);
+            const questionsArray = chatgpt_response.split('\n');
+            console.log(questionsArray)
+            for (const Q of questionsArray) {
+                answerQuestion(Q);
+            }
+            
         } catch (error) {
             console.log(error);
         }
     }
-    /*
-    async function answerQuestion(chatgpt_response) {
+
+    async function answerQuestion(question) {
         try {
+            console.log(question)
             const response = await axios.post(
                 URL,
                 {
                     "model": "gpt-3.5-turbo",
                     "messages": [
-                        { "role": "user", "content": `${chatgpt_response} 小学校低学年にわかるように説明してください。` }
+                        { "role": "user", "content": `${question} 小学校低学年にわかるように3行程度で説明してください。` }
                     ]
                 },
                 {
@@ -52,13 +58,17 @@ function askQuestion(theme) {
                 }
             );
             var chatgpt_response = response.data.choices[0].message.content;
+            const questiondiv = document.createElement('p');
             const answer = document.createElement('p');
+            questiondiv.innerText = question;
+            console.log(answer)
             answer.innerText = chatgpt_response;
+            questionsAndAnswers.appendChild(questiondiv);
             questionsAndAnswers.appendChild(answer);
         } catch (error) {
             console.log(error);
         }
-    }*/
+    }
     makeQuestion();
 }
 
