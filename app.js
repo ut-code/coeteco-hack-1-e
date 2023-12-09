@@ -8,6 +8,8 @@ function askQuestion(theme) {
     // var text = document.getElementById("request_text").value;
     document.getElementById("keywordButtons").innerHTML = "";
     const questionsAndAnswers = document.getElementById('questionsAndAnswers');
+    //もう一回聞いたときのために、一旦カラにする
+    questionsAndAnswers.innerHTML = "";
     async function makeQuestion() {
         try {
             const response = await axios.post(
@@ -29,13 +31,20 @@ function askQuestion(theme) {
             const question = document.createElement('p');
             question.innerText = chatgpt_response;
             questionsAndAnswers.appendChild(question);
-            //終わるボタンをつくる
+            //終わる(はじめの画面に戻る)ボタンをつくる
             const resetButton = document.createElement("button");
             resetButton.innerText = "おわる"
             resetButton.onclick = () => {
                 location.reload();
             } 
             questionsAndAnswers.appendChild(resetButton);
+            //違う質問をするボタンをつくる
+            const askAnotherQuestionButton = document.createElement("button");
+            askAnotherQuestionButton.innerText = `${theme}についてもっときく！`
+            askAnotherQuestionButton.onclick = () => {
+                askQuestion(theme);
+            }
+            questionsAndAnswers.appendChild(askAnotherQuestionButton)
 
             // answerQuestion(chatgpt_response);
         } catch (error) {
