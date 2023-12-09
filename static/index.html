@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive ChatGPT Web App</title>
+</head>
+<body>
+    <div>
+        <h1>Interactive ChatGPT Web App</h1>
+        <button onclick="getKeywords('body')">体</button>
+        <button onclick="getKeywords('space')">宇宙</button>
+        <button onclick="getKeywords('tools')">道具</button>
+        <button onclick="getKeywords('history')">歴史</button>
+        <div id="keywordButtons"></div>
+        <textarea id="userInput" placeholder="Type your question..."></textarea>
+        <div id="chatOutput"></div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
