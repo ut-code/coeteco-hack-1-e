@@ -6,10 +6,12 @@ const URL = "https://api.openai.com/v1/chat/completions";
 
 function askQuestion(theme) {
     // var text = document.getElementById("request_text").value;
-    document.getElementById("keywordButtons").innerHTML = "";
+    
     const questionsAndAnswers = document.getElementById('questionsAndAnswers');
-    //もう一回聞いたときのために、一旦カラにする
-    questionsAndAnswers.innerHTML = "";
+    //もう一回聞いたときのために、元々の「キーワード」のボタン、「○○についてしつもん！」ボタンを消す
+    document.getElementById("keywordButtons").innerHTML = "";
+    document.getElementById("questionButton").innerHTML = "";
+    questionsAndAnswers.innerHTML = `<div>${theme}について、AIに聞いています。ちょっとまってね！</div>`;
     async function makeQuestion() {
         try {
             const response = await axios.post(
@@ -28,6 +30,7 @@ function askQuestion(theme) {
                 }
             );
             var chatgpt_response = response.data.choices[0].message.content;
+            questionsAndAnswers.innerHTML = "";
             const question = document.createElement('p');
             question.innerText = chatgpt_response;
             questionsAndAnswers.appendChild(question);
