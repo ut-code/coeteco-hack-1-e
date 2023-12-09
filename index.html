@@ -5,19 +5,14 @@
 </head>
 
 <body>
-<textarea id="request_text" cols="100" rows="10">
-</textarea>
 <div id="keywordButtons">
   <button onclick="getKeywords('体')">体</button>
   <button onclick="getKeywords('宇宙')">宇宙</button>
   <button onclick="getKeywords('道具')">道具</button>
   <button onclick="getKeywords('歴史')">歴史</button>
 </div>
-<br />
-<input type="button" onClick="reply()" value="話しかける" />
-<br /><br />
-<textarea id="response_text" cols="100" rows="10" disabled>
-</textarea>
+<div id="questionButton"></div>
+<div id="questionsAndAnswers"></div>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
 <script src="app.js"></script>
