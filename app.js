@@ -6,6 +6,7 @@ const URL = "https://api.openai.com/v1/chat/completions";
 
 function askQuestion(theme) {
     // var text = document.getElementById("request_text").value;
+    document.getElementById("keywordButtons").innerHTML = "";
     const questionsAndAnswers = document.getElementById('questionsAndAnswers');
     async function makeQuestion() {
         try {
@@ -28,6 +29,14 @@ function askQuestion(theme) {
             const question = document.createElement('p');
             question.innerText = chatgpt_response;
             questionsAndAnswers.appendChild(question);
+            //終わるボタンをつくる
+            const resetButton = document.createElement("button");
+            resetButton.innerText = "おわる"
+            resetButton.onclick = () => {
+                location.reload();
+            } 
+            questionsAndAnswers.appendChild(resetButton);
+
             // answerQuestion(chatgpt_response);
         } catch (error) {
             console.log(error);
@@ -101,7 +110,11 @@ function displayKeywordButtons(theme, keywords) {
         button.innerText = keyword.trim();
         button.onclick = function() {
             // ボタンがクリックされたら、そのキーワードに関する質問をChatGPTに送信
+            button.disabled = true;
+            button.style.color = "red";
             getKeywords(keyword);
+            // 関数実行中はクリックできないようにする
+            button.disabled = false;
         };
         keywordButtonsDiv.appendChild(button);
     });
@@ -115,7 +128,10 @@ function displayKeywordButtons(theme, keywords) {
         existingButton.innerText = `${theme}についてしつもん`;
         existingButton.onclick = function() {
             // ボタンがクリックされたら、そのキーワードに関する質問をChatGPTに送信
+            existingButton.disabled = true;
+            existingButton.style.color = "red";
             askQuestion(theme);
+            existingButton.disabled = false;
         };
     } else {
         // 存在しない場合は新たに作成
@@ -123,7 +139,10 @@ function displayKeywordButtons(theme, keywords) {
         button.innerText = `${theme}についてしつもん`;
         button.onclick = function() {
             // ボタンがクリックされたら、そのキーワードに関する質問をChatGPTに送信
+            button.disabled = true;
+            button.style.color = "red";
             askQuestion(theme);
+            button.disabled = false;
         };
         questionButtonDiv.appendChild(button);
     }
