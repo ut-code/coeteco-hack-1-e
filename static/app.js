@@ -57,6 +57,8 @@ function askQuestion(theme) {
             console.log(error);
         }
     }
+    makeQuestion();
+    
 }
         
 
