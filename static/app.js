@@ -53,6 +53,12 @@ function askQuestion(theme) {
             .catch(error => {
                 console.error('Error:', error);
             });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+        
 
 function getKeywords(theme) {
     //二度押し防止でボタンを消す
