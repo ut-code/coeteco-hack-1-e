@@ -1,5 +1,5 @@
 
-const API_KEY = "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";
+
 
 function askQuestion(theme) {
     
