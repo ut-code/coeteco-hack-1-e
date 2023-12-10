@@ -12,7 +12,7 @@ function askQuestion(theme) {
     document.getElementById("keywordButtons").innerHTML = "";
     document.getElementById("questionButton").innerHTML = "";
     //待ち時間に豆知識
-    const tips = ["ハチミツはくさらない","人間の体にある血管を全てつなげると、地球2周以上になる！","お菓子のガムとチョコレートを一緒に食べると、チョコレートもガムもとける！"]
+    const tips = ["ハチミツはくさらない","人間の体にある血管を全てつなげると、地球2周以上になる！","お菓子のガムとチョコレートを一緒に食べると、チョコレートもガムもとける！","ショートケーキの「short（ショート）」には「サクサクした」という意味があります。","イカには、しんぞうが3つある！"]
     const text = tips[Math.floor(Math.random() * tips.length)]
     questionsAndAnswers.innerHTML = `
         <div class="waiting">
