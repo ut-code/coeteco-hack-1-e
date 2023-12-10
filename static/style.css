@@ -1,14 +1,150 @@
-button {
+.title{
+  text-align: center;
+  /*font-family:"HGS創英角ﾎﾟｯﾌﾟ体";*/
+  font-family: "M PLUS Rounded 1c";
+  font-size: 48px;
+}
+ .button {
   width: 200px; /* 好きなサイズに変更 */
-  height: 60px; /* 好きなサイズに変更 */
+  height: 100px; /* 好きなサイズに変更 */
   /* その他のスタイル */
+  /*font-family:"HGS創英角ﾎﾟｯﾌﾟ体";*/
+  font-family: "M PLUS Rounded 1c";
+  font-size: 48px; /* テキストのサイズ */
+} 
+/* ○○についてしつもん！のボタン */
+#askbutton {
+
+  justify-content: center;
+  align-items: center;
+
+  
+}
+.firstcenter{
+  text-align: center;
+  font-family:"HGS創英角ﾎﾟｯﾌﾟ体";
   font-size: 16px; /* テキストのサイズ */
 }
 
-/* ○○についてしつもん！のボタン */
-#questionButton > button {
-  width: 500px; /* 好きなサイズに変更 */
-  height: 150px; /* 好きなサイズに変更 */
-  /* その他のスタイル */
+.center{
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  font-family:"HGS創英角ﾎﾟｯﾌﾟ体";
+  font-size: 16px; /* テキストのサイズ */
+}
+.img{
+  position: relative;
+  top: 32px;
+  width: 100px;
+  height: 100px;
+}
+
+
+
+#keyword1 {
+  border-radius: 20px;
+  border-bottom: 10px solid black;
+  box-shadow: 0px 5px 0px 5px rgba(0, 0, 0 ,0.1);
+  background-color: lightblue;
+  height: 200px;
+}
+
+#keyword1:hover {
+  background-color: azure;
+}
+
+#keyword2 {
+  border-radius: 20px;
+  border-bottom: 10px solid black;
+  box-shadow: 0px 5px 0px 5px rgba(0, 0, 0 ,0.1);
+  background-color: lightgreen;
+  height: 200px;
+}
+
+#keyword2:hover {
+  background-color: rgb(218, 243, 227);
+}
+
+#keyword3 {
+  border-radius: 20px;
+  border-bottom: 10px solid black;
+  box-shadow: 0px 5px 0px 5px rgba(0, 0, 0 ,0.1);
+  background-color: lightblue;
+  height: 200px;
+}
+
+#keyword3:hover {
+  background-color: azure;
+}
+
+#keyword4 {
+  border-radius: 20px;
+  border-bottom: 10px solid black;
+  box-shadow: 0px 5px 0px 5px rgba(0, 0, 0 ,0.1);
+  background-color: lightgreen;
+  height: 200px;
+}
+
+#keyword4:hover {
+  background-color: rgb(218, 243, 227);
+}
+
+#questionButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#askButton {
+  display: flex;
+  font-family:"HGS創英角ﾎﾟｯﾌﾟ体";
   font-size: 30px; /* テキストのサイズ */
+  border-radius: 20px;
+  border-bottom: 10px solid black;
+  box-shadow: 0px 5px 0px 5px rgba(0, 0, 0 ,0.1);
+  background-color: pink;
+  width: 60%;
+  height: 100px;
+  border-radius: 20px;
+}
+
+/* アニメーションを適用する要素のスタイル */
+.loader {
+  border: 4px solid #f3f3f3; /* 回転する要素の枠線 */
+  border-top: 4px solid #3498db; /* 枠線の一部を色付け */
+  border-radius: 50%; /* 円形にするための角丸 */
+  width: 200px; /* 要素の幅 */
+  height: 200px; /* 要素の高さ */
+  animation: spin 1s linear infinite; /* 回転アニメーション */
+}
+
+/* 回転アニメーションの定義 */
+@keyframes spin {
+  0% { transform: rotate(0deg); } /* 0度の回転 */
+  100% { transform: rotate(360deg); } /* 360度の回転 */
+}
+
+.waiting {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tips {
+  font-size: 30px;
+  font-family: "HGS創英角ﾎﾟｯﾌﾟ体";
+}
+
+#reset {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#reset button {
+  width: 50%;
+  height: 100px;
+  font-size: 30px;
 }

@@ -3,18 +3,46 @@
   <meta charset="UTF-8" />
   <title>sample</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
 </head>
-
 <body>
-<div id="keywordButtons">
-  <button onclick="getKeywords('体')">体</button>
-  <button onclick="getKeywords('宇宙')">宇宙</button>
-  <button onclick="getKeywords('道具')">道具</button>
-  <button onclick="getKeywords('歴史')">歴史</button>
+  <div class="title">
+    ぎもんをかいけつ!!<br>気になるものをえらんでね。
+  </div>
+<div id="wrapper">
+<div id="keywordButtons" class="firstcenter">
+  <button onclick="getKeywords('動物')"class="button">動物</button>
+  <img src="img/animal.png" class="img">
+  <br><br>
+  <button onclick="getKeywords('自然')"class="button">自然</button>
+  <img src="img/nature.png" class="img">
+  <br><br>
+  <button onclick="getKeywords('道具')" class="button">道具</button>
+  <img src="img/tools.png" class="img" class="center">
+  <br><br>
+  <button onclick="getKeywords('食べ物')" class="button">食べ物</button>
+  <img src="img/meal.png" class="img" class="center">
+  <br><br>
+  <button onclick="getKeywords('科学')" class="button">科学</button>
+  <img src="img/science.png" class="img" class="center">
+  <br><br>
+  <button onclick="getKeywords('体')"class="button">体</button>
+  <img src="img/body.png" class="img">
+  <br><br>
+  <button onclick="getKeywords('乗り物')"class="button">乗り物</button>
+  <img src="img/vehicle.png" class="img">
+  <br><br>
+  <button onclick="getKeywords('文化')" class="button">文化</button>
+  <img src="img/culture.png" class="img">
+  <br><br>
+  <button onclick="getKeywords('歴史')" class="button">歴史</button>
+  <img src="img/history.png" class="img">
 </div>
-<br /><br />
+<br/><br/>
 <div id="questionButton"></div>
+</div>
 <div id="questionsAndAnswers"></div>
+<div id="reset"></div>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
 <script src="app.js"></script>

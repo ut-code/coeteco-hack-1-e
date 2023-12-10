@@ -1,13 +1,21 @@
-
-
-
 function askQuestion(theme) {
-    
     const questionsAndAnswers = document.getElementById('questionsAndAnswers');
     //もう一回聞いたときのために、元々の「キーワード」のボタン、「○○についてしつもん！」ボタンを消す
     document.getElementById("keywordButtons").innerHTML = "";
     document.getElementById("questionButton").innerHTML = "";
-    questionsAndAnswers.innerHTML = `<div>${theme}について、AIに聞いています。ちょっとまってね！</div>`;
+
+    //待ち時間に豆知識
+    const tips = ["ハチミツはくさらない","人間の体にある血管を全てつなげると、地球2周以上になる！","お菓子のガムとチョコレートを一緒に食べると、チョコレートもガムもとける！","ショートケーキの「short（ショート）」には「サクサクした」という意味があります。","イカには、しんぞうが3つある！"]
+    const text = tips[Math.floor(Math.random() * tips.length)]
+    questionsAndAnswers.innerHTML = `
+        <div class="waiting">
+            <div>${theme}について、AIに聞いています。ちょっとまってね！</div>
+            
+            <div class="tips">まめちしき</div>
+            <div class="tips">${text}</div>
+            
+            <div class="loader"></div>
+        </div>`;
     
     async function makeQuestion() {
         try {
@@ -27,61 +35,24 @@ function askQuestion(theme) {
                 question.innerText = chatgpt_response;
                 questionsAndAnswers.appendChild(question);
                 //終わる(はじめの画面に戻る)ボタンをつくる
+                const resetArea = document.getElementById("reset");
                 const resetButton = document.createElement("button");
                 resetButton.innerText = "おわる"
                 resetButton.onclick = () => {
                     location.reload();
                 } 
-                questionsAndAnswers.appendChild(resetButton);
+                resetArea.appendChild(resetButton);
                 //違う質問をするボタンをつくる
                 const askAnotherQuestionButton = document.createElement("button");
                 askAnotherQuestionButton.innerText = `${theme}についてもっときく！`
                 askAnotherQuestionButton.onclick = () => {
                     askQuestion(theme);
                 }
-                questionsAndAnswers.appendChild(askAnotherQuestionButton)
+                resetArea.appendChild(askAnotherQuestionButton)
             })
             .catch(error => {
                 console.error('Error:', error);
             });
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    async function answerQuestion(question) {
-        try {
-            console.log(question)
-            const response = await fetch('/chat', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ content: `${question} 小学校低学年にわかるように3行程度で説明してください。` }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                // ChatGPTからの応答を表示
-                var chatOutput = document.getElementById('chatOutput');
-                chatOutput.innerHTML = '<p>User: ' + userInput + '</p><p>ChatGPT: ' + data.response + '</p>';
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-            var chatgpt_response = response.data.choices[0].message.content;
-            const questiondiv = document.createElement('p');
-            const answer = document.createElement('p');
-            questiondiv.innerText = question;
-            console.log(answer)
-            answer.innerText = chatgpt_response;
-            questionsAndAnswers.appendChild(questiondiv);
-            questionsAndAnswers.appendChild(answer);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    makeQuestion();
-}
 
 function getKeywords(theme) {
     //二度押し防止でボタンを消す
@@ -90,7 +61,6 @@ function getKeywords(theme) {
     // var text = document.getElementById("request_text").value;
     async function getResponse() {
         try {
-            console.log(theme);
             const response = await fetch('/chat', {
                 method: 'post',
                 headers: {
@@ -103,11 +73,12 @@ function getKeywords(theme) {
                 // ChatGPTからの応答を表示
                 console.log(data.response);
                 var chatgpt_response = data.response;
+                // $("#response_text").val(chatgpt_response);
+                //「キーワード1,キーワード2,....」の形でないときは弾く
                 if (/^[^\uFF0C\uff10-\uff19\uff0e0-9.\u3000-\u3002]*$/.test(chatgpt_response)) {
                     displayKeywordButtons(theme, chatgpt_response.split(','));
                 } else {
                     document.getElementById("keywordButtons").innerHTML = `すみません。エラーになりました。${theme}についてもう1かいきいてみよう！<br/><button onclick="getKeywords('${theme}')">${theme}について知りたい</button>`
-                    console.log(chatgpt_response);
                 }
             })
             .catch(error => {
@@ -122,11 +93,16 @@ function getKeywords(theme) {
 
 function displayKeywordButtons(theme, keywords) {
     const keywordButtonsDiv = document.getElementById('keywordButtons');
+    keywordButtonsDiv.classList = ["center"];
     keywordButtonsDiv.innerHTML = '';
 
     // 取得したキーワードをボタンとして表示
+    let i = 1;
     keywords.forEach(keyword => {
         const button = document.createElement('button');
+        button.classList = ["button"];
+        button.id = ["keyword" + i.toString()];
+        i++;
         button.innerText = keyword.trim();
         button.onclick = function() {
             // ボタンがクリックされたら、そのキーワードに関する質問をChatGPTに送信
@@ -137,15 +113,20 @@ function displayKeywordButtons(theme, keywords) {
             button.disabled = false;
         };
         keywordButtonsDiv.appendChild(button);
+        const br = document.createElement("br");
+        
     });
 
+    //グリッド
+    document.getElementById("wrapper").classList = ["wrapper"]
+  
     // "についてしつもん" ボタンを表示
     const questionButtonDiv = document.getElementById('questionButton');
 
     // すでにボタンが存在する場合は上書き
     const existingButton = questionButtonDiv.querySelector('button');
     if (existingButton) {
-        existingButton.innerText = `${theme}についてしつもん`;
+        existingButton.innerText = `${theme}についてしつもん!!`;
         existingButton.onclick = function() {
             // ボタンがクリックされたら、そのキーワードに関する質問をChatGPTに送信
             existingButton.disabled = true;
@@ -156,7 +137,9 @@ function displayKeywordButtons(theme, keywords) {
     } else {
         // 存在しない場合は新たに作成
         const button = document.createElement('button');
-        button.innerText = `${theme}についてしつもん`;
+        button.innerText = `${theme}についてしつもん!!`;
+        button.id = "askButton";
+
         button.onclick = function() {
             // ボタンがクリックされたら、そのキーワードに関する質問をChatGPTに送信
             button.disabled = true;
