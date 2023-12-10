@@ -1,4 +1,5 @@
 function askQuestion(theme) {
+    document.getElementById("reset").innerHTML = "";
     const questionsAndAnswers = document.getElementById('questionsAndAnswers');
     //もう一回聞いたときのために、元々の「キーワード」のボタン、「○○についてしつもん！」ボタンを消す
     document.getElementById("keywordButtons").innerHTML = "";
