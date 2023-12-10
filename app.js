@@ -14,7 +14,15 @@ function askQuestion(theme) {
     //待ち時間に豆知識
     const tips = ["ハチミツはくさらない","人間の体にある血管を全てつなげると、地球2周以上になる！","お菓子のガムとチョコレートを一緒に食べると、チョコレートもガムもとける！"]
     const text = tips[Math.floor(Math.random() * tips.length)]
-    questionsAndAnswers.innerHTML = `<div>${theme}について、AIに聞いています。ちょっとまってね！</div><br />${text}`;
+    questionsAndAnswers.innerHTML = `
+        <div class="waiting">
+            <div>${theme}について、AIに聞いています。ちょっとまってね！</div>
+            
+            <div class="tips">まめちしき</div>
+            <div class="tips">${text}</div>
+            
+            <div class="loader"></div>
+        </div>`;
     async function makeQuestion() {
         try {
             const response = await axios.post(
@@ -38,19 +46,20 @@ function askQuestion(theme) {
             question.innerText = chatgpt_response;
             questionsAndAnswers.appendChild(question);
             //終わる(はじめの画面に戻る)ボタンをつくる
+            const resetArea = document.getElementById("reset");
             const resetButton = document.createElement("button");
             resetButton.innerText = "おわる"
             resetButton.onclick = () => {
                 location.reload();
             } 
-            questionsAndAnswers.appendChild(resetButton);
+            resetArea.appendChild(resetButton);
             //違う質問をするボタンをつくる
             const askAnotherQuestionButton = document.createElement("button");
             askAnotherQuestionButton.innerText = `${theme}についてもっときく！`
             askAnotherQuestionButton.onclick = () => {
                 askQuestion(theme);
             }
-            questionsAndAnswers.appendChild(askAnotherQuestionButton)
+            resetArea.appendChild(askAnotherQuestionButton)
 
             // answerQuestion(chatgpt_response);
         } catch (error) {
@@ -126,11 +135,16 @@ function getKeywords(theme) {
 
 function displayKeywordButtons(theme, keywords) {
     const keywordButtonsDiv = document.getElementById('keywordButtons');
+    keywordButtonsDiv.classList = ["center"];
     keywordButtonsDiv.innerHTML = '';
 
     // 取得したキーワードをボタンとして表示
+    let i = 1;
     keywords.forEach(keyword => {
         const button = document.createElement('button');
+        button.classList = ["button"];
+        button.id = ["keyword" + i.toString()];
+        i++;
         button.innerText = keyword.trim();
         button.onclick = function() {
             // ボタンがクリックされたら、そのキーワードに関する質問をChatGPTに送信
@@ -141,7 +155,12 @@ function displayKeywordButtons(theme, keywords) {
             button.disabled = false;
         };
         keywordButtonsDiv.appendChild(button);
+        const br = document.createElement("br");
+        
     });
+
+    //グリッド
+    document.getElementById("wrapper").classList = ["wrapper"]
 
     // "についてしつもん" ボタンを表示
     const questionButtonDiv = document.getElementById('questionButton');
@@ -149,7 +168,7 @@ function displayKeywordButtons(theme, keywords) {
     // すでにボタンが存在する場合は上書き
     const existingButton = questionButtonDiv.querySelector('button');
     if (existingButton) {
-        existingButton.innerText = `${theme}についてしつもん`;
+        existingButton.innerText = `${theme}についてしつもん!!`;
         existingButton.onclick = function() {
             // ボタンがクリックされたら、そのキーワードに関する質問をChatGPTに送信
             existingButton.disabled = true;
@@ -160,7 +179,8 @@ function displayKeywordButtons(theme, keywords) {
     } else {
         // 存在しない場合は新たに作成
         const button = document.createElement('button');
-        button.innerText = `${theme}についてしつもん`;
+        button.innerText = `${theme}についてしつもん!!`;
+        button.id = "askButton";
         button.onclick = function() {
             // ボタンがクリックされたら、そのキーワードに関する質問をChatGPTに送信
             button.disabled = true;

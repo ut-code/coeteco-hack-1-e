@@ -9,7 +9,8 @@
   <div class="title">
     ぎもんをかいけつ!!<br>気になるものをえらんでね。
   </div>
-<div id="keywordButtons" class="center">
+<div id="wrapper">
+<div id="keywordButtons" class="firstcenter">
   <button onclick="getKeywords('動物')"class="button">動物</button>
   <img src="img/animal.png" class="img">
   <br><br>
@@ -37,9 +38,11 @@
   <button onclick="getKeywords('歴史')" class="button">歴史</button>
   <img src="img/history.png" class="img">
 </div>
-<br><br>
+<br/><br/>
 <div id="questionButton"></div>
+</div>
 <div id="questionsAndAnswers"></div>
+<div id="reset"></div>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
 <script src="app.js"></script>
