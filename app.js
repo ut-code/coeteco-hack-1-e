@@ -17,9 +17,9 @@ function askQuestion(theme) {
             const response = await axios.post(
                 URL,
                 {
-                    "model": "gpt-3.5-turbo",
+                    "model": "gpt-4-1106-preview",
                     "messages": [
-                        { "role": "user", "content": `「${theme}」に関する質問を4つ作り、それに回答してください。小学校低学年にわかるように説明してください。` }
+                        { "role": "user", "content": `${theme}に関する質問を4つ作り、それに回答してください。以下の条件を守って下さい。\n条件1:小学生に話しかける、なるべく漢字を使わない簡単な言葉で質問と回答を作って下さい。\n条件2:質問や回答が漢字を含む場合は必ず、全ての漢字に送り仮名をつけてください。` }
                     ]
                 },
                 {

@@ -1,14 +1,33 @@
-button {
-  width: 200px; /* 好きなサイズに変更 */
-  height: 60px; /* 好きなサイズに変更 */
-  /* その他のスタイル */
-  font-size: 16px; /* テキストのサイズ */
+.title{
+  text-align: center;
+  /*font-family:"HGS創英角ﾎﾟｯﾌﾟ体";*/
+  font-family: "M PLUS Rounded 1c";
+  font-size: 48px;
 }
-
+.button {
+  width: 200px; /* 好きなサイズに変更 */
+  height: 100px; /* 好きなサイズに変更 */
+  /* その他のスタイル */
+  /*font-family:"HGS創英角ﾎﾟｯﾌﾟ体";*/
+  font-family: "M PLUS Rounded 1c";
+  font-size: 48px; /* テキストのサイズ */
+}
 /* ○○についてしつもん！のボタン */
 #questionButton > button {
   width: 500px; /* 好きなサイズに変更 */
   height: 150px; /* 好きなサイズに変更 */
   /* その他のスタイル */
+  font-family:"HGS創英角ﾎﾟｯﾌﾟ体";
   font-size: 30px; /* テキストのサイズ */
+}
+.center{
+  text-align: center;
+  font-family:"HGS創英角ﾎﾟｯﾌﾟ体";
+  font-size: 16px; /* テキストのサイズ */
+}
+.img{
+  position: relative;
+  top: 32px;
+  width: 100px;
+  height: 100px;
 }
