@@ -84,6 +84,9 @@ function askQuestion(theme) {
 }
 
 function getKeywords(theme) {
+    //二度押し防止でボタンを消す
+    document.getElementById("keywordButtons").innerHTML = `${theme}のなにをしりたい？`
+    document.getElementById("questionButton").innerHTML = "";
     // var text = document.getElementById("request_text").value;
     async function getResponse() {
         try {
