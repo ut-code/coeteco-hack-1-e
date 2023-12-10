@@ -107,7 +107,13 @@ function getKeywords(theme) {
             );
             var chatgpt_response = response.data.choices[0].message.content;
             // $("#response_text").val(chatgpt_response);
-            displayKeywordButtons(theme, chatgpt_response.split(','));
+            //「キーワード1,キーワード2,....」の形でないときは弾く
+            if (/^[^\uFF0C\uff10-\uff19\uff0e0-9.\u3000-\u3002]*$/.test(chatgpt_response)) {
+                displayKeywordButtons(theme, chatgpt_response.split(','));
+            } else {
+                document.getElementById("keywordButtons").innerHTML = `すみません。エラーになりました。${theme}についてもう1かいきいてみよう！<br/><button onclick="getKeywords('${theme}')">${theme}について知りたい</button>`
+            }
+            
         } catch (error) {
             console.log(error);
         }
