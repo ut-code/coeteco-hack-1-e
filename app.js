@@ -11,7 +11,10 @@ function askQuestion(theme) {
     //もう一回聞いたときのために、元々の「キーワード」のボタン、「○○についてしつもん！」ボタンを消す
     document.getElementById("keywordButtons").innerHTML = "";
     document.getElementById("questionButton").innerHTML = "";
-    questionsAndAnswers.innerHTML = `<div>${theme}について、AIに聞いています。ちょっとまってね！</div>`;
+    //待ち時間に豆知識
+    const tips = ["ハチミツはくさらない","人間の体にある血管を全てつなげると、地球2周以上になる！","お菓子のガムとチョコレートを一緒に食べると、チョコレートもガムもとける！"]
+    const text = tips[Math.floor(Math.random() * tips.length)]
+    questionsAndAnswers.innerHTML = `<div>${theme}について、AIに聞いています。ちょっとまってね！</div><br />${text}`;
     async function makeQuestion() {
         try {
             const response = await axios.post(
